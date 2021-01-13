@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Poke.App", "Poke.App\Poke.App.csproj", "{6C576A52-3C9F-406E-962C-09E82F8EF123}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Poke.Entities", "Poke.Entities\Poke.Entities.csproj", "{29A3D710-4AD7-4B1F-90BB-9E3F00900616}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Poke.Web", "Poke.Web\Poke.Web.csproj", "{DA559F7F-927B-4B1C-9CD5-EFC0A1067C71}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6C576A52-3C9F-406E-962C-09E82F8EF123}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C576A52-3C9F-406E-962C-09E82F8EF123}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C576A52-3C9F-406E-962C-09E82F8EF123}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C576A52-3C9F-406E-962C-09E82F8EF123}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29A3D710-4AD7-4B1F-90BB-9E3F00900616}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29A3D710-4AD7-4B1F-90BB-9E3F00900616}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29A3D710-4AD7-4B1F-90BB-9E3F00900616}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29A3D710-4AD7-4B1F-90BB-9E3F00900616}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA559F7F-927B-4B1C-9CD5-EFC0A1067C71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA559F7F-927B-4B1C-9CD5-EFC0A1067C71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA559F7F-927B-4B1C-9CD5-EFC0A1067C71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA559F7F-927B-4B1C-9CD5-EFC0A1067C71}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7C4BF352-C6B9-42B0-A777-43D379849457}
+	EndGlobalSection
+EndGlobal
