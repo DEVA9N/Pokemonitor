@@ -56,6 +56,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="LazyLoading\ILazyLoadAsync.cs" />
+    <Compile Include="Mvvm\DependencyObjectExtension.cs" />
     <Compile Include="Mvvm\ViewModelBase.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

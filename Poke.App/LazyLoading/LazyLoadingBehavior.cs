@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interactivity;
-using System.Windows.Media;
+using Poke.App.Mvvm;
 
 namespace Poke.App.LazyLoading
 {
@@ -33,7 +33,7 @@ namespace Poke.App.LazyLoading
                 _scrollViewer.ScrollChanged -= ScrollViewer_ScrollChanged;
             }
 
-            _scrollViewer = GetChildOfType<ScrollViewer>(AssociatedObject);
+            _scrollViewer = AssociatedObject.GetVisualChild<ScrollViewer>();
 
             if (_scrollViewer != null)
             {
@@ -49,28 +49,6 @@ namespace Poke.App.LazyLoading
             {
                 (_scrollViewer.DataContext as ILazyLoadAsync)?.LoadNextAsync(PageSize);
             }
-        }
-
-        private static T GetChildOfType<T>(DependencyObject dependencyObject) where T : FrameworkElement
-        {
-            if (dependencyObject == null)
-            {
-                return null;
-            }
-
-            for (var i = 0; i < VisualTreeHelper.GetChildrenCount(dependencyObject); i++)
-            {
-                var child = VisualTreeHelper.GetChild(dependencyObject, i);
-
-                var result = child as T ?? GetChildOfType<T>(child);
-
-                if (result != null)
-                {
-                    return result;
-                }
-            }
-
-            return null;
         }
     }
 }
