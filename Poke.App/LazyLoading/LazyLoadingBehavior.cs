@@ -11,14 +11,6 @@ namespace Poke.App.LazyLoading
     {
         private ScrollViewer _scrollViewer;
 
-        public ILazyLoadAsync Loader
-        {
-            get => (ILazyLoadAsync)GetValue(LoaderProperty);
-            set => SetValue(LoaderProperty, value);
-        }
-
-        public static readonly DependencyProperty LoaderProperty = DependencyProperty.Register("Loader", typeof(ILazyLoadAsync), typeof(LazyLoadingBehavior), new PropertyMetadata(null));
-
         public int PageSize
         {
             get => (int)GetValue(PageSizeProperty);
@@ -30,7 +22,7 @@ namespace Poke.App.LazyLoading
         protected override void OnAttached()
         {
             base.OnAttached();
-        
+
             TypeDescriptor.GetProperties(AssociatedObject)["ItemsSource"].AddValueChanged(AssociatedObject, ItemsSourceChanged);
         }
 
@@ -40,14 +32,14 @@ namespace Poke.App.LazyLoading
             {
                 _scrollViewer.ScrollChanged -= ScrollViewer_ScrollChanged;
             }
-            
-            _scrollViewer = FindChildControl<ScrollViewer>(AssociatedObject);
-            
+
+            _scrollViewer = GetChildOfType<ScrollViewer>(AssociatedObject);
+
             if (_scrollViewer != null)
             {
                 _scrollViewer.ScrollChanged += ScrollViewer_ScrollChanged;
-            
-                Loader?.InitializeAsync(PageSize);
+
+                (_scrollViewer.DataContext as ILazyLoadAsync)?.InitializeAsync(PageSize);
             }
         }
 
@@ -55,22 +47,30 @@ namespace Poke.App.LazyLoading
         {
             if (_scrollViewer.VerticalOffset >= _scrollViewer.ScrollableHeight)
             {
-                Loader?.LoadNextAsync(PageSize);
+                (_scrollViewer.DataContext as ILazyLoadAsync)?.LoadNextAsync(PageSize);
             }
         }
 
-        private T FindChildControl<T>(DependencyObject control) where T : FrameworkElement
+        private static T GetChildOfType<T>(DependencyObject dependencyObject) where T : FrameworkElement
         {
-            int childNumber = VisualTreeHelper.GetChildrenCount(control);
-            for (int i = 0; i < childNumber; i++)
+            if (dependencyObject == null)
             {
-                DependencyObject child = VisualTreeHelper.GetChild(control, i);
-                if (child != null && child is T)
-                    return child as T;
-                else
-                    return FindChildControl<T>(child);
+                return null;
             }
-            return default(T);
+
+            for (var i = 0; i < VisualTreeHelper.GetChildrenCount(dependencyObject); i++)
+            {
+                var child = VisualTreeHelper.GetChild(dependencyObject, i);
+
+                var result = child as T ?? GetChildOfType<T>(child);
+
+                if (result != null)
+                {
+                    return result;
+                }
+            }
+
+            return null;
         }
     }
 }

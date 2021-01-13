@@ -12,7 +12,7 @@
     <Grid>
         <ListView ItemsSource="{Binding Pokemon}">
             <i:Interaction.Behaviors>
-                <lazyLoading:LazyLoadingBehavior PageSize="50" Loader="{Binding .}" />
+                <lazyLoading:LazyLoadingBehavior PageSize="50" />
             </i:Interaction.Behaviors>
         </ListView>
     </Grid>

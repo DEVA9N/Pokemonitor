@@ -8,15 +8,14 @@ namespace Poke.App
     /// </summary>
     public partial class App : Application
     {
-        protected override async void OnStartup(StartupEventArgs e)
+        protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
 
-            // Fuckup Point
-            var pokemonService = new PokemonServiceAsync();
-            var dataContext = new PokemonViewModel(pokemonService);
+            var service = new PokemonServiceAsync();
+            var viewModel = new PokemonViewModel(service);
             
-            MainWindow = new MainWindow { DataContext = dataContext };
+            MainWindow = new MainWindow { DataContext = viewModel };
             MainWindow.Show();
         }
     }

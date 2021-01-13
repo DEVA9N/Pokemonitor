@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:app="clr-namespace:Poke.App"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
+        Title="Pokemon" Height="450" Width="800"
         d:DataContext="{d:DesignInstance app:PokemonViewModel}">
     <Grid>
-        <app:PokemonView DataContext="{Binding .}"/>
+        <app:PokemonView/>
     </Grid>
 </Window>

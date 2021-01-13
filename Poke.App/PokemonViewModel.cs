@@ -14,16 +14,14 @@ namespace Poke.App
     class PokemonViewModel : ViewModelBase, ILazyLoadAsync
     {
         private readonly IPokemonServiceAsync _service;
-        private readonly ObservableCollection<Pokemon> _pokemon;
+        private readonly ObservableCollection<PokemonReference> _pokemon;
 
-        public ICollection<Pokemon> Pokemon => _pokemon;
+        public ICollection<PokemonReference> Pokemon => _pokemon;
 
         public PokemonViewModel(IPokemonServiceAsync service)
         {
             _service = service;
-            _pokemon = new ObservableCollection<Pokemon>();
-
-            Title = "Pokemon";
+            _pokemon = new ObservableCollection<PokemonReference>();
         }
 
         public async Task InitializeAsync(int pageSize)

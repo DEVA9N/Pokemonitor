@@ -7,7 +7,7 @@ namespace Poke.Web
 {
     public interface IPokemonServiceAsync
     {
-        Task<IEnumerable<Pokemon>> GetPokemonAsync(int count);
-        Task<IEnumerable<Pokemon>> GetPokemonAsync(int offset, int count);
+        Task<IEnumerable<PokemonReference>> GetPokemonAsync(int count);
+        Task<IEnumerable<PokemonReference>> GetPokemonAsync(int offset, int count);
     }
 }

@@ -2,16 +2,15 @@
 
 namespace Poke.Entities
 {
-    public class Pokemon
+    public class PokemonReference
     {
-        // {"name":"ivysaur","url":"https://pokeapi.co/api/v2/pokemon/2/"}
-
+        // JSON deserialization is case insensitive - we could stick to the .NET naming convention
         public String Name { get; set; }
         public String Url { get; set; }
 
         public override string ToString()
         {
-            return Name ?? "UNDEFINED";
+            return Name;
         }
     }
 }
