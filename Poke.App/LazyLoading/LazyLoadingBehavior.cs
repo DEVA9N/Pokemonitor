@@ -43,11 +43,16 @@ namespace Poke.App.LazyLoading
             }
         }
 
-        private void ScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
+        private async void ScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
-            if (_scrollViewer.VerticalOffset >= _scrollViewer.ScrollableHeight)
+            if (!(_scrollViewer.VerticalOffset >= _scrollViewer.ScrollableHeight))
             {
-                (_scrollViewer.DataContext as ILazyLoadAsync)?.LoadNextAsync(PageSize);
+                return;
+            }
+
+            if (_scrollViewer.DataContext is ILazyLoadAsync lazyLoader)
+            {
+                await lazyLoader?.LoadNextAsync(PageSize);
             }
         }
     }

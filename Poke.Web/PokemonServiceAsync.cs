@@ -5,18 +5,17 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Poke.Entities;
+using RestSharp;
 
 namespace Poke.Web
 {
     public sealed class PokemonServiceAsync : IPokemonServiceAsync
     {
-        private static readonly HttpClient Client = new HttpClient();
-        private static String BaseUri = "https://pokeapi.co/api/v2/";
+        private static readonly RestClient Client;
 
         static PokemonServiceAsync()
         {
-            Client = new HttpClient();
-            Client.BaseAddress = new Uri(BaseUri);
+            Client = new RestClient(@"https://pokeapi.co/api/v2/");
         }
 
         public async Task<IEnumerable<PokemonReference>> GetPokemonAsync(int count = 20)
@@ -41,19 +40,10 @@ namespace Poke.Web
 
         private static async Task<IEnumerable<PokemonReference>> GetPokemonAsyncImpl(int offset, int count)
         {
-            var request = $"pokemon?offset={offset}&limit={count}";
-            var response = await Client.GetAsync(request);
-
-            if (!response.IsSuccessStatusCode)
-            {
-                // Log request and response
-                return await Task.FromResult(Enumerable.Empty<PokemonReference>());
-            }
-
-            // Extension method from the Microsoft.AspNet.WebApi.Client nuget package
-            var content = await response.Content.ReadAsAsync<PokemonPage>();
-
-            return content.Results;
+            var request = new RestRequest($"pokemon?offset={offset}&limit={count}");
+            var response = await Client.GetAsync<PokemonPage>(request);
+             
+            return response.Results;
         }
     }
 }
